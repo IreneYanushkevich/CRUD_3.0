@@ -64,7 +64,7 @@
         <configuration>
             <user>postgres</user>
             <password>123456_Ii</password>
-            <url>jdbc:postgresql://localhost:5432/crud3</url>
+            <url>jdbc:postgresql://localhost:5432/postgres</url>
         </configuration>
     </plugin>
         <plugin>
