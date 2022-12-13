@@ -1,11 +1,23 @@
 package com.irinayanushkevich.crud_3.model;
 
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
+@Table(name = "writers", schema = "public", catalog = "postgres")
 public class Writer {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "writer_id", nullable = false)
     private Long id;
+    @Basic
+    @Column(name = "firstname", nullable = false, length = 30)
     private String firstName;
+    @Basic
+    @Column(name = "lastname", nullable = false, length = 30)
     private String lastName;
+    @OneToMany(mappedBy = "writersByWriterId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Post> posts;
 
     public Writer() {

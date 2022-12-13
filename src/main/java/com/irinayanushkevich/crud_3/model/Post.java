@@ -1,15 +1,33 @@
 package com.irinayanushkevich.crud_3.model;
 
+import jakarta.persistence.*;
+
 import java.util.List;
 
+@Entity
+@Table(name = "posts", schema = "public", catalog = "postgres")
 public class Post {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "post_id", nullable = false)
     private Long id;
+    @Basic
+    @Column(name = "content", nullable = false, length = -1)
     private String content;
+    @Basic
+    @Column(name = "created", nullable = false)
     private String created;
+    @Basic
+    @Column(name = "updated", nullable = false)
     private String updated;
-    private List<Label> labels;
+    @Basic
+    @Column(name = "post_status", nullable = false, length = 10)
     private PostStatus status;
-
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name="posts_labels",
+            joinColumns=@JoinColumn(name="post_id"),
+            inverseJoinColumns=@JoinColumn(name="label_id"))
+    private List<Label> labels;
     public Post() {
     }
 

@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS labels(
 
 CREATE TABLE IF NOT EXISTS writers(
     writer_id SERIAL PRIMARY KEY,
-    firstname VARCHAR (30),
-    lastname VARCHAR (30)
+    firstname VARCHAR (30) NOT NULL,
+    lastname VARCHAR (30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS posts(
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS posts(
     content TEXT NOT NULL UNIQUE,
     created TIMESTAMP NOT NULL,
     updated TIMESTAMP NOT NULL,
-    post_status VARCHAR(10),
+    post_status VARCHAR(10) NOT NULL,
     writer_id INTEGER,
     FOREIGN KEY (writer_id) REFERENCES writers (writer_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
