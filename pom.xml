@@ -18,17 +18,12 @@
         <maven.connector.version>3.10.1</maven.connector.version>
         <postgresql.connector.version>42.5.1</postgresql.connector.version>
         <hibernate.connector.version>6.1.5.Final</hibernate.connector.version>
-        <flyway.connector.version>9.8.3</flyway.connector.version>
+        <!--flyway.connector.version>7.7.3</flyway.connector.version-->
         <junit.connector.version>4.13.2</junit.connector.version>
         <mockito.connector.version>4.8.0</mockito.connector.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>${maven.connector.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -42,7 +37,7 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>${flyway.connector.version}</version>
+            <version>9.8.3</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -56,21 +51,32 @@
             <version>${mockito.connector.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
-    <plugins>
-    <plugin>
-        <groupId>org.flywaydb</groupId>
-        <artifactId>flyway-maven-plugin</artifactId>
-        <version>${flyway.connector.version}</version>
-        <configuration>
-            <user>postgres</user>
-            <password>123456_Ii</password>
-            <url>jdbc:postgresql://localhost:5432/postgres</url>
-        </configuration>
-    </plugin>
-    </plugins>
+        <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>9.8.3</version>
+                <configuration>
+                    <user>postgres</user>
+                    <password>123456_Ii</password>
+                    <url>jdbc:postgresql://localhost:5432/postgres</url>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-core</artifactId>
+                        <version>9.8.3</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.connector.version}</version>
+            </plugin>
+        </plugins>
     </build>
 </project>
