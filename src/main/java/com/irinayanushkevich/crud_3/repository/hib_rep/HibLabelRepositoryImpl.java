@@ -27,6 +27,7 @@ public class HibLabelRepositoryImpl implements LabelRepository {
         }
     }
 
+    @Override
     public Label getById(Long id) {
         Label label;
         try (Session session = hibernateConnector.openSession()) {
@@ -35,6 +36,7 @@ public class HibLabelRepositoryImpl implements LabelRepository {
         return label;
     }
 
+    @Override
     public Label edit(Label label) {
         try (Session session = hibernateConnector.openTransactionSession()) {
             session.merge(label);
@@ -46,6 +48,7 @@ public class HibLabelRepositoryImpl implements LabelRepository {
         }
     }
 
+    @Override
     public boolean delete(Long id) {
         try (Session session = hibernateConnector.openTransactionSession()) {
             Label label = session.get(Label.class, id);
@@ -55,6 +58,7 @@ public class HibLabelRepositoryImpl implements LabelRepository {
         return true;
     }
 
+    @Override
     public List<Label> getAll() {
         List<Label> labels;
         try (Session session = hibernateConnector.openSession()) {

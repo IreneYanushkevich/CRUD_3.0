@@ -20,7 +20,8 @@ public class PostView {
         switch (act) {
             case 1 -> {
                 Post post = preparePostData();
-                System.out.println("\nYou created a new post:\n " + post);
+                cv.printResultName(post);
+                //System.out.println("\nYou created a new post:\n " + post);
             }
             case 2 -> {
                 Long id = cv.askId();

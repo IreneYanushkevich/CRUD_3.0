@@ -2,6 +2,7 @@ package com.irinayanushkevich.crud_3.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -16,20 +17,21 @@ public class Post {
     private String content;
     @Basic
     @Column(name = "created", nullable = false)
-    private String created;
+    private LocalDateTime created;
     @Basic
     @Column(name = "updated", nullable = false)
-    private String updated;
-    @Basic
+    private LocalDateTime updated;
+    @Enumerated(EnumType.STRING)
     @Column(name = "post_status", nullable = false, length = 10)
     private PostStatus status;
-    @Column(name = "writer_id", nullable = true)
+    @Column(name = "writer_id")
     private Long writer_id;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name="posts_labels",
             joinColumns=@JoinColumn(name="post_id"),
             inverseJoinColumns=@JoinColumn(name="label_id"))
     private List<Label> labels;
+
     public Post() {
     }
 
@@ -55,19 +57,19 @@ public class Post {
         this.content = content;
     }
 
-    public String getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(String created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
-    public String getUpdated() {
+    public LocalDateTime getUpdated() {
         return updated;
     }
 
-    public void setUpdated(String updated) {
+    public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
     }
 

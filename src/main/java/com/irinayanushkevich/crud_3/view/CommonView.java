@@ -80,7 +80,7 @@ public class CommonView {
 
     public void printResultName(Object obj) {
         if (obj == null) {
-            System.out.println("\nPosition with this name already exist.");
+            System.out.println("\nPosition with this text already exist.");
         } else {
             System.out.println("\nDone! Work with the next position is completed: " + obj);
         }
