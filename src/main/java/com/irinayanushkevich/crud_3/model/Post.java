@@ -23,7 +23,9 @@ public class Post {
     @Basic
     @Column(name = "post_status", nullable = false, length = 10)
     private PostStatus status;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Column(name = "writer_id", nullable = true)
+    private Long writer_id;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name="posts_labels",
             joinColumns=@JoinColumn(name="post_id"),
             inverseJoinColumns=@JoinColumn(name="label_id"))

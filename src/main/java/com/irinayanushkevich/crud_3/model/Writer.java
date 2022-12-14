@@ -17,7 +17,7 @@ public class Writer {
     @Basic
     @Column(name = "lastname", nullable = false, length = 30)
     private String lastName;
-    @OneToMany(mappedBy = "writersByWriterId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "writer_id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Post> posts;
 
     public Writer() {

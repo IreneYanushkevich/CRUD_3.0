@@ -45,8 +45,8 @@ public class LabelView {
             }
             case 5 -> {
                 List<Label> labels = lc.getAll();
-                if (labels.size() == 0) {
-                    System.out.println("\nFile is empty or doesn't exist.");
+                if (labels == null) {
+                    System.out.println("\nThere is not any labels.");
                 } else {
                     labels.forEach(System.out::println);
                 }

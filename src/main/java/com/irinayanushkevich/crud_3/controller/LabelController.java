@@ -9,8 +9,7 @@ public class LabelController {
     private final LabelService LabelService = new LabelService();
 
     public Label create(String name) {
-        Long id = null;
-        Label l = new Label(id, name);
+        Label l = new Label(null, name);
         return LabelService.create(l);
     }
 

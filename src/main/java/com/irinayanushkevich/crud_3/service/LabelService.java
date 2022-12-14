@@ -1,7 +1,5 @@
 package com.irinayanushkevich.crud_3.service;
 
-
-
 import com.irinayanushkevich.crud_3.model.Label;
 import com.irinayanushkevich.crud_3.repository.LabelRepository;
 import com.irinayanushkevich.crud_3.repository.hib_rep.HibLabelRepositoryImpl;
