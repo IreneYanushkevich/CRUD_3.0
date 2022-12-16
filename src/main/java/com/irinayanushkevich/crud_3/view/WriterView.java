@@ -11,7 +11,6 @@ import java.util.List;
 public class WriterView {
     private final CommonView cv;
     private final WriterController wc = new WriterController();
-    private final PostController pc = new PostController();
 
     public WriterView(CommonView cv) {
         this.cv = cv;
@@ -65,6 +64,7 @@ public class WriterView {
     }
 
     private List<Post> choosePosts() {
+        PostController pc = new PostController();
         List<Post> posts = pc.getAll();
         List<Post> choice = new ArrayList<>();
         while (true) {
@@ -79,7 +79,7 @@ public class WriterView {
                 choice.add(post);
             } else {
                 Post addP = pc.getById(id);
-                if (addP != null && !choice.contains(addP)) {
+                if (addP != null) {
                     choice.add(addP);
                     posts.remove(addP);
                 } else {

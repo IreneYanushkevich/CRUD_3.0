@@ -5,13 +5,14 @@ import com.irinayanushkevich.crud_3.model.Post;
 import com.irinayanushkevich.crud_3.service.PostService;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class PostController {
     private final PostService postService = new PostService();
 
     public Post create(String content, List<Label> labels) {
-        Post post = new Post(null, content, labels);
+        Post post = new Post(null, content, null, labels);
         return postService.create(post);
     }
 
@@ -19,8 +20,8 @@ public class PostController {
         return postService.getById(id);
     }
 
-    public Post edit(Long id, String content, List<Label> labels) {
-        Post post = new Post(id, content, labels);
+    public Post edit(Long id, String content, LocalDateTime created, List<Label> labels) {
+        Post post = new Post(id, content, created, labels);
         return postService.edit(post);
     }
 

@@ -22,7 +22,6 @@ public class HibLabelRepositoryImpl implements LabelRepository {
             label.setId(id);
             return label;
         } catch (PersistenceException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -43,7 +42,6 @@ public class HibLabelRepositoryImpl implements LabelRepository {
             session.getTransaction().commit();
             return label;
         } catch (PersistenceException e) {
-            e.printStackTrace();
             return null;
         }
     }

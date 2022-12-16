@@ -1,6 +1,5 @@
 package com.irinayanushkevich.crud_3.repository.hib_rep;
 
-import com.irinayanushkevich.crud_3.model.Label;
 import com.irinayanushkevich.crud_3.model.Post;
 import com.irinayanushkevich.crud_3.model.PostStatus;
 import com.irinayanushkevich.crud_3.repository.PostRepository;
@@ -29,7 +28,6 @@ public class HibPostRepositoryImpl implements PostRepository {
             post.setId(id);
             return post;
         } catch (PersistenceException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -46,16 +44,12 @@ public class HibPostRepositoryImpl implements PostRepository {
     @Override
     public Post edit(Post post) {
         try (Session session = hibernateConnector.openTransactionSession()) {
-            Post postEdited = session.get(Post.class, post.getId());
-            postEdited.setContent(post.getContent());
-            postEdited.setUpdated(getDate().toLocalDateTime());
-            postEdited.setStatus(PostStatus.ACTIVE);
-            postEdited.setLabels(post.getLabels());
-            session.merge(postEdited);
+            post.setUpdated(getDate().toLocalDateTime());
+            post.setStatus(PostStatus.ACTIVE);
+            session.merge(post);
             session.getTransaction().commit();
-            return postEdited;
+            return post;
         } catch (PersistenceException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -64,7 +58,8 @@ public class HibPostRepositoryImpl implements PostRepository {
     public boolean delete(Long id) {
         try (Session session = hibernateConnector.openTransactionSession()) {
             Post post = session.get(Post.class, id);
-            session.remove(post);
+            post.setStatus(PostStatus.DELETED);
+            session.merge(post);
             session.getTransaction().commit();
         }
         return true;

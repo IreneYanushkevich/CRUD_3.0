@@ -21,7 +21,6 @@ public class PostView {
             case 1 -> {
                 Post post = preparePostData();
                 cv.printResultName(post);
-                //System.out.println("\nYou created a new post:\n " + post);
             }
             case 2 -> {
                 Long id = cv.askId();
@@ -114,13 +113,13 @@ public class PostView {
         switch (choice) {
             case 1 -> {
                 String content = cv.askString("Please, write new post content >>>>>>");
-                postAfterEdit = pc.edit(id, content, post.getLabels());
+                postAfterEdit = pc.edit(id, content, post.getCreated(), post.getLabels());
             }
             case 2 -> {
                 List<Label> labels = chooseLabels();
-                postAfterEdit = pc.edit(id, post.getContent(), labels);
+                postAfterEdit = pc.edit(id, post.getContent(), post.getCreated(), labels);
             }
-            case 3 -> postAfterEdit = pc.edit(id, post.getContent(), post.getLabels());
+            case 3 -> postAfterEdit = pc.edit(id, post.getContent(), post.getCreated(), post.getLabels());
             case 0 -> {
             }
         }

@@ -24,20 +24,20 @@ public class Post {
     @Enumerated(EnumType.STRING)
     @Column(name = "post_status", nullable = false, length = 10)
     private PostStatus status;
-    @Column(name = "writer_id")
-    private Long writer_id;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinTable(name="posts_labels",
-            joinColumns=@JoinColumn(name="post_id"),
-            inverseJoinColumns=@JoinColumn(name="label_id"))
+    @JoinTable(name = "posts_labels",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "label_id"))
     private List<Label> labels;
 
     public Post() {
     }
 
-    public Post(Long id, String content, List<Label> labels) {
+    public Post(Long id, String content, LocalDateTime created, List<Label> labels) {
         this.id = id;
         this.content = content;
+        this.created = created;
         this.labels = labels;
     }
 
