@@ -1,4 +1,4 @@
-## Условие задачи: 
+## УСЛОВИЕ ЗАДАЧИ: 
 
 Необходимо реализовать консольное CRUD приложение, которое взаимодействует с БД и позволяет выполнять все CRUD операции над сущностями:
 Writer (id, firstName, lastName, List<Post> posts)
@@ -15,7 +15,7 @@ PostStatus (enum ACTIVE, UNDER_REVIEW, DELETED)
 Сервисный слой приложения должен быть покрыт юнит тестами (junit + mockito)
 Результатом выполнения задания должен быть репозиторий на github. Технологии: Java, PostgreSQL, Hibernate, Flyway, Maven.
 
-## ИНСТРУКЦИЯ ПО ЗАПУСКУ ПРИЛОЖЕНИЯ:
+## Инструкция по запуску приложения:
 
 1. Предварительно убедитесь, что на вашем компьютере установлены JVM, JRE, PostgreSql, Hibernate, Maven, FlyWay, JUnit, Mockito.
 2. Скачать программу CRUDAPP.jar по ссылке https://github.com/IreneYanushkevich/CRUD_3.0/blob/master/CRUD_3.0.jar                                                                                                                                                                
