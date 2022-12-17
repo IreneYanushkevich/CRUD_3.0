@@ -81,7 +81,7 @@ public class WriterView {
                 Post addP = pc.getById(id);
                 if (addP != null) {
                     choice.add(addP);
-                    posts.remove(addP);
+                    posts.removeIf(p -> p.getContent().equals(addP.getContent()));
                 } else {
                     System.out.println("Post with this id doesn't exist or it's already added");
                 }
