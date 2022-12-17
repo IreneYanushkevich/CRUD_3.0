@@ -17,7 +17,7 @@ public class Writer {
     @Basic
     @Column(name = "lastname", nullable = false, length = 30)
     private String lastName;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "writer_id")
     private List<Post> posts;
 
