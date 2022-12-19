@@ -29,9 +29,7 @@ public class PostServiceTest {
     }
 
     private List<Post> getPosts() {
-        List<Post> posts = new ArrayList<>();
-        posts.add(getPost());
-        return posts;
+        return List.of(getPost());
     }
 
     @Test

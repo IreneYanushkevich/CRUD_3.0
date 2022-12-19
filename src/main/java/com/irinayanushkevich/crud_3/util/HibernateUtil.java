@@ -1,11 +1,11 @@
-package com.irinayanushkevich.crud_3.repository.hib_rep;
+package com.irinayanushkevich.crud_3.util;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class HibernateConnector {
+public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
 
@@ -18,15 +18,15 @@ public class HibernateConnector {
         }
     }
 
-    private SessionFactory getSessionFactory() {
+    private static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
-    public Session openSession() {
+    public static Session openSession() {
         return getSessionFactory().openSession();
     }
 
-    public Session openTransactionSession() {
+    public static Session openTransactionSession() {
         Session session = openSession();
         session.beginTransaction();
         return session;

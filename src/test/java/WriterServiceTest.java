@@ -28,9 +28,7 @@ public class WriterServiceTest {
     }
 
     private List<Writer> getWriters() {
-        List<Writer> writers = new ArrayList<>();
-        writers.add(getWriter());
-        return writers;
+        return List.of(getWriter());
     }
 
     @Test

@@ -50,8 +50,8 @@ public class WriterView {
             }
             case 5 -> {
                 List<Writer> writers = wc.getAll();
-                if (writers.size() == 0) {
-                    System.out.println("\nFile is empty or doesn't exist.");
+                if (writers == null) {
+                    System.out.println("\nWriters don't exist in the database.");
                 } else {
                     writers.forEach(System.out::println);
                 }

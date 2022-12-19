@@ -3,13 +3,12 @@ package com.irinayanushkevich.crud_3.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "labels", schema = "public", catalog = "postgres")
+@Table(name = "labels", schema = "public")
 public class Label {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "label_id", nullable = false)
     private Long id;
-    @Basic
     @Column(name = "name", nullable = false, length = 10)
     private String name;
 

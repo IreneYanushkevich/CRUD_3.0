@@ -46,7 +46,7 @@ public class LabelView {
             case 5 -> {
                 List<Label> labels = lc.getAll();
                 if (labels == null) {
-                    System.out.println("\nThere is not any labels.");
+                    System.out.println("\nThere is not any labels in the database.");
                 } else {
                     labels.forEach(System.out::println);
                 }

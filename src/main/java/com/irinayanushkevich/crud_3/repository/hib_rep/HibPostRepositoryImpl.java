@@ -3,24 +3,17 @@ package com.irinayanushkevich.crud_3.repository.hib_rep;
 import com.irinayanushkevich.crud_3.model.Post;
 import com.irinayanushkevich.crud_3.model.PostStatus;
 import com.irinayanushkevich.crud_3.repository.PostRepository;
+import com.irinayanushkevich.crud_3.util.HibernateUtil;
 import jakarta.persistence.PersistenceException;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 public class HibPostRepositoryImpl implements PostRepository {
 
-    private final HibernateConnector hibernateConnector = new HibernateConnector();
-
     @Override
     public Post create(Post post) {
-        try (Session session = hibernateConnector.openTransactionSession()) {
-            post.setCreated(getDate().toLocalDateTime());
-            post.setUpdated(getDate().toLocalDateTime());
+        try (Session session = HibernateUtil.openTransactionSession()) {
             post.setStatus(PostStatus.REVIEW);
             session.persist(post);
             Long id = (Long) session.getIdentifier(post);
@@ -35,7 +28,7 @@ public class HibPostRepositoryImpl implements PostRepository {
     @Override
     public Post getById(Long id) {
         Post post;
-        try (Session session = hibernateConnector.openSession()) {
+        try (Session session = HibernateUtil.openSession()) {
             post = session.get(Post.class, id);
         }
         return post;
@@ -43,11 +36,11 @@ public class HibPostRepositoryImpl implements PostRepository {
 
     @Override
     public Post edit(Post post) {
-        try (Session session = hibernateConnector.openTransactionSession()) {
-            post.setUpdated(getDate().toLocalDateTime());
+        try (Session session = HibernateUtil.openTransactionSession()) {
             post.setStatus(PostStatus.ACTIVE);
             session.merge(post);
             session.getTransaction().commit();
+            post.setUpdated(session.get(Post.class, post.getId()).getUpdated());
             return post;
         } catch (PersistenceException e) {
             return null;
@@ -56,7 +49,7 @@ public class HibPostRepositoryImpl implements PostRepository {
 
     @Override
     public boolean delete(Long id) {
-        try (Session session = hibernateConnector.openTransactionSession()) {
+        try (Session session = HibernateUtil.openTransactionSession()) {
             Post post = session.get(Post.class, id);
             post.setStatus(PostStatus.DELETED);
             session.merge(post);
@@ -68,16 +61,9 @@ public class HibPostRepositoryImpl implements PostRepository {
     @Override
     public List<Post> getAll() {
         List<Post> posts;
-        try (Session session = hibernateConnector.openSession()) {
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<Post> query = builder.createQuery(Post.class);
-            query.from(Post.class);
-            posts = session.createQuery(query).getResultList();
+        try (Session session = HibernateUtil.openSession()) {
+            posts = session.createQuery("FROM Post ", Post.class).getResultList();
         }
         return posts;
-    }
-
-    private Timestamp getDate() {
-        return new Timestamp(new Date().getTime());
     }
 }

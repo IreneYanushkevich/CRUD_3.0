@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS posts(
     updated TIMESTAMP NOT NULL,
     post_status VARCHAR(10) NOT NULL,
     writer_id INTEGER,
-    UNIQUE (post_id, writer_id),
     FOREIGN KEY (writer_id) REFERENCES writers (writer_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

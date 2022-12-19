@@ -5,16 +5,14 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "writers", schema = "public", catalog = "postgres")
+@Table(name = "writers", schema = "public")
 public class Writer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "writer_id", nullable = false)
     private Long id;
-    @Basic
     @Column(name = "firstname", nullable = false, length = 30)
     private String firstName;
-    @Basic
     @Column(name = "lastname", nullable = false, length = 30)
     private String lastName;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)

@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -27,9 +26,7 @@ public class LabelServiceTest {
     }
 
     private List<Label> getLabels() {
-        List<Label> labels = new ArrayList<>();
-        labels.add(getLabel());
-        return labels;
+        return List.of(getLabel());
     }
 
     @Test

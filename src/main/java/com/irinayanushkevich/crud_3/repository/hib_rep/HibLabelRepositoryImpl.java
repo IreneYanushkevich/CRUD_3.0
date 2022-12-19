@@ -2,20 +2,17 @@ package com.irinayanushkevich.crud_3.repository.hib_rep;
 
 import com.irinayanushkevich.crud_3.model.Label;
 import com.irinayanushkevich.crud_3.repository.LabelRepository;
+import com.irinayanushkevich.crud_3.util.HibernateUtil;
 import jakarta.persistence.PersistenceException;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 
 import java.util.List;
 
 public class HibLabelRepositoryImpl implements LabelRepository {
 
-    private final HibernateConnector hibernateConnector = new HibernateConnector();
-
     @Override
     public Label create(Label label) {
-        try (Session session = hibernateConnector.openTransactionSession()) {
+        try (Session session = HibernateUtil.openTransactionSession()) {
             session.persist(label);
             Long id = (Long) session.getIdentifier(label);
             session.getTransaction().commit();
@@ -29,7 +26,7 @@ public class HibLabelRepositoryImpl implements LabelRepository {
     @Override
     public Label getById(Long id) {
         Label label;
-        try (Session session = hibernateConnector.openSession()) {
+        try (Session session = HibernateUtil.openSession()) {
             label = session.get(Label.class, id);
         }
         return label;
@@ -37,7 +34,7 @@ public class HibLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public Label edit(Label label) {
-        try (Session session = hibernateConnector.openTransactionSession()) {
+        try (Session session = HibernateUtil.openTransactionSession()) {
             session.merge(label);
             session.getTransaction().commit();
             return label;
@@ -48,7 +45,7 @@ public class HibLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public boolean delete(Long id) {
-        try (Session session = hibernateConnector.openTransactionSession()) {
+        try (Session session = HibernateUtil.openTransactionSession()) {
             Label label = session.get(Label.class, id);
             session.remove(label);
             session.getTransaction().commit();
@@ -59,11 +56,8 @@ public class HibLabelRepositoryImpl implements LabelRepository {
     @Override
     public List<Label> getAll() {
         List<Label> labels;
-        try (Session session = hibernateConnector.openSession()) {
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<Label> query = builder.createQuery(Label.class);
-            query.from(Label.class);
-            labels = session.createQuery(query).getResultList();
+        try (Session session = HibernateUtil.openSession()) {
+            labels = session.createQuery("FROM Label", Label.class).getResultList();
         }
         return labels;
     }

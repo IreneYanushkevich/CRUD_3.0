@@ -1,24 +1,25 @@
 package com.irinayanushkevich.crud_3.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "posts", schema = "public", catalog = "postgres")
+@Table(name = "posts", schema = "public")
 public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "post_id", nullable = false)
     private Long id;
-    @Basic
     @Column(name = "content", nullable = false, length = -1)
     private String content;
-    @Basic
+    @CreationTimestamp
     @Column(name = "created", nullable = false)
     private LocalDateTime created;
-    @Basic
+    @UpdateTimestamp
     @Column(name = "updated", nullable = false)
     private LocalDateTime updated;
     @Enumerated(EnumType.STRING)

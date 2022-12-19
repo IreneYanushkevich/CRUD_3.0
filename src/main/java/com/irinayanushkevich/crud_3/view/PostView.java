@@ -47,8 +47,8 @@ public class PostView {
             }
             case 5 -> {
                 List<Post> posts = pc.getAll();
-                if (posts.size() == 0) {
-                    System.out.println("\nFile is empty or doesn't exist.");
+                if (posts == null) {
+                    System.out.println("\nPosts don't exist in the database.");
                 } else {
                     posts.forEach(System.out::println);
                 }

@@ -20,6 +20,7 @@
         <hibernate.connector.version>6.1.5.Final</hibernate.connector.version>
         <junit.connector.version>4.13.2</junit.connector.version>
         <mockito.connector.version>4.8.0</mockito.connector.version>
+        <jakarta.connector.version>3.0.0</jakarta.connector.version>
     </properties>
 
     <dependencies>
@@ -51,7 +52,7 @@
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
-            <version>3.0.0</version>
+            <version>${jakarta.connector.version}</version>
         </dependency>
 
     </dependencies>
